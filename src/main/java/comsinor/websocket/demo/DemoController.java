@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ResponseBody
 public class DemoController {
 
-	private DemoService demoService;
+	private final DemoService demoService;
 
 	@Autowired
 	public DemoController(DemoService demoService) {

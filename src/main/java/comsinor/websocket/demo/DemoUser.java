@@ -1,7 +1,5 @@
 package comsinor.websocket.demo;
 
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -14,7 +12,7 @@ class DemoUser {
 	@Id
 	Long id;
 	String name;
-	String  profile;
+	String profile;
 
 	public DemoUser(Long id, String name) {
 		this.id = id;
