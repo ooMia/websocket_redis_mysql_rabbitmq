@@ -66,7 +66,7 @@ public class RedisController {
 	) throws NoSuchElementException {
 		String key = body.get("key").orElseThrow();
 		String value = body.get("value").orElseThrow();
-		return redisService.saveOneByKeyValue(key, value);
+		return redisService.updateOneByKeyValue(key, value);
 	}
 
 	// DELETE

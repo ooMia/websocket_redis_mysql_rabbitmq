@@ -68,7 +68,9 @@ public class RedisStringsRepositoryImpl implements RedisStringsRepository {
 	@NonNull
 	public Iterable<RedisStrings> findAll() {
 		List<RedisStrings> res = new ArrayList<>();
-
+		getAllKeys().forEach(key ->
+			findById(key).ifPresent(res::add)
+		);
 		return res;
 	}
 

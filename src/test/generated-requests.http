@@ -1,7 +1,5 @@
 ###
-GET http://localhost:8080/redis/countall
-
-
+GET http://localhost:8080/redis/number
 
 ### READ ONE
 // @no-log
@@ -9,8 +7,6 @@ GET http://localhost:8080/redis/countall
     request.variables.set("key", (Math.random() * 10).toFixed(0))
 %}
 GET http://localhost:8080/redis/sample?key={{key}}
-
-
 
 ### CREATE ONE
 // @no-log
@@ -42,11 +38,9 @@ Accept: application/json
   "value": "{{value}}"
 }
 
-
 ### DELETE ONE
 // @no-log
 < {%
     request.variables.set("key", (Math.random() * 10).toFixed(0))
 %}
-DELETE http://localhost:8080/redis/sample?key={{key}}}
-Accept: application/json
+DELETE http://localhost:8080/redis/sample?key={{key}}
