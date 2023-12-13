@@ -17,7 +17,7 @@ public class LoggerService {
 		this.loggerRepository = loggerRepository;
 	}
 
-	public void saveRequest(LogDto logDto) {
+	public void saveResponse(LogDto logDto) {
 		FromWhereDidWhatLog entity = new FromWhereDidWhatLog(logDto);
 		loggerRepository.save(entity);
 		log.info(entity.toString());

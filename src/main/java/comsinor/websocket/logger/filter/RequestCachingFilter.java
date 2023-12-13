@@ -38,7 +38,7 @@ public class RequestCachingFilter extends OncePerRequestFilter {
 		@NonNull FilterChain filterChain
 	) throws ServletException, IOException {
 		CachedHttpServletRequest cachedHttpServletRequest = new CachedHttpServletRequest(request);
-		loggerService.saveRequest(new LogDto(request, response));
 		filterChain.doFilter(cachedHttpServletRequest, response);
+		loggerService.saveResponse(new LogDto(request, response));
 	}
 }

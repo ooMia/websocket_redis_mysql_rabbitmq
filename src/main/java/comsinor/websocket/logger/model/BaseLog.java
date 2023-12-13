@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,8 +22,9 @@ abstract class BaseLog {
 	protected Long id;
 
 	@CreationTimestamp
-	LocalDateTime createdAt;
+	protected LocalDateTime createdAt;
 
 	@CurrentTimestamp
-	LocalDateTime currentAt;
+	@Transient
+	protected LocalDateTime currentAt;
 }
