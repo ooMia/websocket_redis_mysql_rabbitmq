@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import comsinor.websocket.logger.LoggerService;
+import comsinor.websocket.logger.model.LogDto;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebFilter;
@@ -37,7 +38,7 @@ public class RequestCachingFilter extends OncePerRequestFilter {
 		@NonNull FilterChain filterChain
 	) throws ServletException, IOException {
 		CachedHttpServletRequest cachedHttpServletRequest = new CachedHttpServletRequest(request);
-		loggerService.saveRequest(request, response);
+		loggerService.saveRequest(new LogDto(request, response));
 		filterChain.doFilter(cachedHttpServletRequest, response);
 	}
 }

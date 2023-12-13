@@ -44,3 +44,7 @@ Accept: application/json
     request.variables.set("key", (Math.random() * 10).toFixed(0))
 %}
 DELETE http://localhost:8080/redis/sample?key={{key}}
+
+### DELETE ALL
+// @no-log
+

@@ -1,9 +1,10 @@
 package comsinor.websocket.logger.model;
 
-import java.time.LocalDateTime;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public record LogDto(
-	LocalDateTime createdAt,
-	LocalDateTime currentAt
+	HttpServletRequest request,
+	HttpServletResponse response
 ) {
 }

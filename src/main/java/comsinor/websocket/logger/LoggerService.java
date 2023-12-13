@@ -3,9 +3,8 @@ package comsinor.websocket.logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import comsinor.websocket.logger.model.RequestLocationLog;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import comsinor.websocket.logger.model.FromWhereDidWhatLog;
+import comsinor.websocket.logger.model.LogDto;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -18,9 +17,8 @@ public class LoggerService {
 		this.loggerRepository = loggerRepository;
 	}
 
-	public void saveRequest(HttpServletRequest request, HttpServletResponse response) {
-		RequestLocationLog entity = new RequestLocationLog();
-		// TODO: use LogDto(should rename) with req/res
+	public void saveRequest(LogDto logDto) {
+		FromWhereDidWhatLog entity = new FromWhereDidWhatLog(logDto);
 		loggerRepository.save(entity);
 		log.info(entity.toString());
 	}
