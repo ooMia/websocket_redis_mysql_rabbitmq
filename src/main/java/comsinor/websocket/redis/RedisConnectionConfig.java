@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RedisConnectionConfig {
-	private final StringRedisTemplate template;
+    private final StringRedisTemplate template;
 
-	public RedisConnectionConfig(StringRedisTemplate template) {
-		this.template = template;
-	}
+    public RedisConnectionConfig(StringRedisTemplate template) {
+        this.template = template;
+    }
 
 }

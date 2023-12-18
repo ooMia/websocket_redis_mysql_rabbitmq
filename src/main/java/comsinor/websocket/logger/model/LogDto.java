@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public record LogDto(
-	HttpServletRequest request,
-	HttpServletResponse response
+        HttpServletRequest request,
+        HttpServletResponse response
 ) {
 }

@@ -5,8 +5,8 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface RedisStringsRepository extends CrudRepository<RedisStrings, String> {
-	Iterable<String> getAllKeys();
+    Iterable<String> getAllKeys();
 
-	RedisStrings update(RedisStrings redisStrings);
+    RedisStrings update(RedisStrings redisStrings);
 
 }
