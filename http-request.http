@@ -1,0 +1,23 @@
+###
+// @no-log
+< {%
+    request.variables.set("key", (Math.random() * 10).toFixed(0))
+%}
+GET http://localhost:8080/echo/redis/sample?key={{key}}&key={{key}}&key={{key}}
+Accept: application/json
+
+###
+// @no-log
+< {%
+    request.variables.set("key", (Math.random() * 10).toFixed(0))
+%}
+POST http://localhost:8080/echo/redis/sample?key={{key}}&key={{key}}&key={{key}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "key": "{{key}}",
+  "value": "{{key}}"
+}
+
+###
