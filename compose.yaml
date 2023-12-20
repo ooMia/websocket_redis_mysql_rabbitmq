@@ -10,14 +10,12 @@ services:
       - '3306:3306'
   rabbitmq:
     image: 'rabbitmq:3-management'
-    hostname: rabbitmqHost
     environment:
       - 'RABBITMQ_DEFAULT_PASS=secret'
       - 'RABBITMQ_DEFAULT_USER=myuser'
     ports:
-      - '15674:15674'
-      - '15672:15672'
-      - '5672:5672'
+      - "5672"
+      - "15672:15672"
   redis:
     image: 'redis:latest'
     ports:
