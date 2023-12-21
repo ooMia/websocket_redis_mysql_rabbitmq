@@ -2,12 +2,14 @@ package com.sinor.backend.caching.demo.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class DemoResponse {
     @Id
     private String id;
@@ -15,6 +17,7 @@ public class DemoResponse {
     private String profile;
 
     private String aString;
+
 //    private Bar aBar;
 //
 //    @AllArgsConstructor

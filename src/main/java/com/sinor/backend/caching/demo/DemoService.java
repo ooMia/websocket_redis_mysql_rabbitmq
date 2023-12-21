@@ -17,11 +17,9 @@ public class DemoService {
 
     public DemoResponseDto getFirstUser() throws NoSuchElementException {
         // Save a new user
-        DemoResponse entity = DemoResponse.builder()
-                .id("key")
-                .name("asd")
-                .profile("asda")
-                .build();
+        DemoResponse entity = new DemoResponse(
+                "a", "a", "a", "a"
+        );
         demoRepository.save(entity);
 
         // Find a user by ID
