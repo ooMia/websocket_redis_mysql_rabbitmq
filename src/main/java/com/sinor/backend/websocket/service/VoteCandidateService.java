@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VoteService {
+public class VoteCandidateService {
     private final VoteRepository voteRepository;
     private final BoardRepository boardRepository;
 
     @Autowired
-    public VoteService(VoteRepository voteRepository, BoardRepository boardRepository) {
+    public VoteCandidateService(VoteRepository voteRepository, BoardRepository boardRepository) {
         this.voteRepository = voteRepository;
         this.boardRepository = boardRepository;
     }

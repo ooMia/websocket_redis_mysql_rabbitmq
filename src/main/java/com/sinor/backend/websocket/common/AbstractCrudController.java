@@ -1,11 +1,14 @@
 package com.sinor.backend.websocket.common;
 
-public interface AbstractCrudController<ResponseDto> {
-    ResponseDto createObject();
+import org.springframework.http.ResponseEntity;
 
-    ResponseDto readObject();
+public interface AbstractCrudController<ResponseDto, RequestDto> {
 
-    ResponseDto updateObject();
+    ResponseEntity<ResponseDto> readObject(Long id);
 
-    ResponseDto deleteObject();
+    ResponseEntity<ResponseDto> createObject(RequestDto requestDto);
+
+    ResponseEntity<ResponseDto> updateObject(RequestDto requestDto);
+
+    ResponseEntity<ResponseDto> deleteObject(RequestDto requestDto);
 }

@@ -1,0 +1,33 @@
+### CREATE board#1
+// @no-log
+POST http://localhost:8080/board
+Content-Type: application/json
+
+{
+}
+
+### CREATE vote#1
+// @no-log
+POST http://localhost:8080/vote
+Content-Type: application/json
+
+{
+  "boardId": 1,
+  "title": "vote#1"
+}
+
+### CREATE vote#2
+// @no-log
+POST http://localhost:8080/vote
+Content-Type: application/json
+
+{
+  "boardId": 1,
+  "title": "vote#2"
+}
+
+### READ board#1
+// @no-log
+GET http://localhost:8080/board/1
+
+

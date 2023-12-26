@@ -1,8 +1,9 @@
 package com.sinor.backend.websocket.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import com.sinor.backend.websocket.model.entity.Vote;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface VoteRepository extends CrudRepository<VoteRepository, Long> {
+public interface VoteRepository extends JpaRepository<Vote, Long> {
 }
