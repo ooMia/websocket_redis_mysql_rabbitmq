@@ -1,5 +1,14 @@
 package com.sinor.backend.websocket.model.dto.response;
 
 
-public record VoteLogResponseDto(Long id) {
+import lombok.Builder;
+
+@Builder
+
+public record VoteLogResponseDto(
+        Long id,
+        Long voteCandidateId,
+        Long memberId
+) {
+
 }

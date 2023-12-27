@@ -1,30 +1,76 @@
 package com.sinor.backend.websocket.service;
 
+import com.sinor.backend.websocket.common.AbstractCrudService;
 import com.sinor.backend.websocket.model.dto.request.VoteRequestDto;
 import com.sinor.backend.websocket.model.dto.response.VoteResponseDto;
-import com.sinor.backend.websocket.model.entity.Vote;
-import com.sinor.backend.websocket.repository.BoardRepository;
+import com.sinor.backend.websocket.model.entity.board.vote.Vote;
+import com.sinor.backend.websocket.model.entity.board.vote.VoteCandidate;
 import com.sinor.backend.websocket.repository.VoteRepository;
-import java.util.NoSuchElementException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VoteService {
-    private final VoteRepository voteRepository;
-    private final BoardRepository boardRepository;
+public class VoteService extends AbstractCrudService<VoteResponseDto, VoteRequestDto, VoteRepository, Vote, Long> {
+
+    private final VoteCandidateService voteCandidateService;
 
     @Autowired
-    public VoteService(VoteRepository voteRepository, BoardRepository boardRepository) {
-        this.voteRepository = voteRepository;
-        this.boardRepository = boardRepository;
+    public VoteService(VoteRepository voteRepository, VoteCandidateService voteCandidateService) {
+        super(voteRepository);
+        this.voteCandidateService = voteCandidateService;
     }
 
-    public VoteResponseDto createObject(VoteRequestDto requestDto) throws NoSuchElementException {
-        Vote vote = Vote.builder()
-                .title(requestDto.title())
-                .boardId(requestDto.boardId())
+    @Override
+    protected Vote fromRequestDtoToEntity(VoteRequestDto voteRequestDto) {
+        return Vote.builder()
+                .boardId(voteRequestDto.boardId())
+                .isAnonymous(voteRequestDto.isAnonymous())
+                .isMultiple(voteRequestDto.isMultiple())
+                .validUntil(voteRequestDto.validUntil())
+                .title(voteRequestDto.title())
                 .build();
-        return new VoteResponseDto(voteRepository.saveAndFlush(vote).getId());
+    }
+
+    @Override
+    protected VoteResponseDto fromEntitytoResponseDto(Vote entity) {
+        return VoteResponseDto.builder()
+                .id(entity.getId())
+                .validUntil(entity.getValidUntil())
+                .isAnonymous(entity.getIsAnonymous())
+                .isMultiple(entity.getIsMultiple())
+                .candidates(entity.getCandidates() != null
+                        ? entity.getCandidates().stream().map(voteCandidateService::fromEntitytoResponseDto).toList()
+                        : null)
+                .totalCount(entity.getCandidates() != null
+                        ? getTotalCount(entity.getCandidates())
+                        : 0)
+                .build();
+    }
+
+    private Integer getTotalCount(List<VoteCandidate> candidates) {
+        Integer sum = 0;
+        for (VoteCandidate e : candidates) {
+            sum += voteCandidateService.fromEntitytoResponseDto(e).count();
+        }
+        return sum;
+    }
+
+    @Override
+    public VoteResponseDto updateObject(Long id, VoteRequestDto voteRequestDto) {
+        return null;
+    }
+
+
+    @Override
+    // TODO: related candidates does not appeared in the `voteDidSave`
+    public VoteResponseDto createObject(VoteRequestDto voteRequestDto) {
+        Vote voteDidSave = repository.save(fromRequestDtoToEntity(voteRequestDto));
+        voteRequestDto.candidates().forEach(e -> {
+            VoteCandidate candidate = voteCandidateService.fromRequestDtoToEntity(e);
+            candidate.setVoteId(voteDidSave.getId());
+            voteCandidateService.createObject(candidate);
+        });
+        return fromEntitytoResponseDto(voteDidSave);
     }
 }

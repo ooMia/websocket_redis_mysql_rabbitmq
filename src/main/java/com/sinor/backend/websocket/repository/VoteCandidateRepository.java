@@ -1,6 +1,6 @@
 package com.sinor.backend.websocket.repository;
 
-import com.sinor.backend.websocket.model.entity.VoteCandidate;
+import com.sinor.backend.websocket.model.entity.board.vote.VoteCandidate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

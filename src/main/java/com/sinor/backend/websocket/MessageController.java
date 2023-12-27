@@ -9,17 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class MessageController {
-	private final RabbitMQProducer producer;
-	public MessageController(RabbitMQProducer rabbitMQProducer){
-		this.producer=rabbitMQProducer;
-	}
+    private final RabbitMQProducer producer;
 
-	// http://localhost:8080/api/v1/publish?message=hello
-	@GetMapping("/publish")
-	public ResponseEntity<String> sendDirectMessage(
-		@RequestParam("message") String message
-	){
-		producer.sendMessage(message);
-		return ResponseEntity.ok("Message sent to RabbitMQ ...");
-	}
+    public MessageController(RabbitMQProducer rabbitMQProducer) {
+        this.producer = rabbitMQProducer;
+    }
+
+    // http://localhost:8080/api/v1/publish?message=hello
+    @GetMapping("/publish")
+    public ResponseEntity<String> sendDirectMessage(
+            @RequestParam("message") String message
+    ) {
+        producer.sendMessage(message);
+        return ResponseEntity.ok("Message sent to RabbitMQ ...");
+    }
 }

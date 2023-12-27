@@ -1,6 +1,6 @@
-package com.sinor.backend.websocket.controller;
+package com.sinor.backend.websocket.controller.board;
 
-import com.sinor.backend.websocket.common.AbstractCrudController;
+import com.sinor.backend.websocket.common.BaseCrudController;
 import com.sinor.backend.websocket.model.dto.request.BoardRequestDto;
 import com.sinor.backend.websocket.model.dto.response.BoardResponseDto;
 import com.sinor.backend.websocket.service.BoardService;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/board")
-public class BoardController implements AbstractCrudController<BoardResponseDto, BoardRequestDto> {
+public class BoardController implements BaseCrudController<BoardResponseDto, BoardRequestDto, Long> {
 
     private final BoardService boardService;
 
@@ -26,36 +26,37 @@ public class BoardController implements AbstractCrudController<BoardResponseDto,
         this.boardService = boardService;
     }
 
-
-    @Override
-    @GetMapping("/{id}")
-    public ResponseEntity<BoardResponseDto> readObject(
-            @PathVariable(name = "id") Long id
-    ) {
-        return ResponseEntity.ok(boardService.readObjcect(id));
-    }
-
     @Override
     @PostMapping
     public ResponseEntity<BoardResponseDto> createObject(
-            @RequestBody BoardRequestDto requestDto
+            @RequestBody BoardRequestDto boardRequestDto
     ) {
-        return ResponseEntity.ok(boardService.createObject(requestDto));
+        return ResponseEntity.ok(boardService.createObject(boardRequestDto));
     }
 
     @Override
-    @PutMapping
+    @GetMapping("/{board_id}")
+    public ResponseEntity<BoardResponseDto> readObject(
+            @PathVariable(name = "board_id") Long id
+    ) {
+        return ResponseEntity.ok(boardService.readObject(id));
+    }
+
+
+    @Override
+    @PutMapping("/{board_id}")
     public ResponseEntity<BoardResponseDto> updateObject(
-            @RequestBody BoardRequestDto requestDto
+            @PathVariable(name = "board_id") Long id,
+            @RequestBody BoardRequestDto boardRequestDto
     ) {
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(boardService.updateObject(id, boardRequestDto));
     }
 
     @Override
-    @DeleteMapping
+    @DeleteMapping("/{board_id}")
     public ResponseEntity<BoardResponseDto> deleteObject(
-            @RequestBody BoardRequestDto requestDto
+            @PathVariable(name = "board_id") Long id
     ) {
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(boardService.deleteObject(id));
     }
 }

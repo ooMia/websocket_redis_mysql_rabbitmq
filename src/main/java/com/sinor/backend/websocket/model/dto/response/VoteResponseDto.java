@@ -1,5 +1,16 @@
 package com.sinor.backend.websocket.model.dto.response;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import lombok.Builder;
 
-public record VoteResponseDto(Long id) {
+@Builder
+public record VoteResponseDto(
+        Long id,
+        List<VoteCandidateResponseDto> candidates,
+        LocalDateTime validUntil,
+        Boolean isAnonymous,
+        Boolean isMultiple,
+        Integer totalCount
+) {
 }

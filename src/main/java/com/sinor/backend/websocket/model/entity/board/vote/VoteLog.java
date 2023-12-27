@@ -1,4 +1,4 @@
-package com.sinor.backend.websocket.model.entity;
+package com.sinor.backend.websocket.model.entity.board.vote;
 
 import com.sinor.backend.websocket.common.BaseEntity;
 import jakarta.persistence.Entity;
@@ -12,19 +12,24 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Member implements BaseEntity<Long> {
-    // top-level class
+public class VoteLog implements BaseEntity<Long> {
+    // parent
+    private Long voteCandidateId;
+
+    // vote_candidate > vote_log <-> member
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    // mapping
+    private Long memberId;
+
     // properties
-    private String name;
-    private String profile;
 
     @Builder
-    public Member(String name, String profile) {
-        this.name = name;
-        this.profile = profile;
+    public VoteLog(Long voteCandidateId, Long memberId) {
+        this.voteCandidateId = voteCandidateId;
+        this.memberId = memberId;
     }
+
 }

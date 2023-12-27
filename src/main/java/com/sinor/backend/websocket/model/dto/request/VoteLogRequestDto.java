@@ -4,7 +4,7 @@ import lombok.Builder;
 
 @Builder
 public record VoteLogRequestDto(
-        Long boardId,
-        String title
+        Long voteCandidateId,
+        Long memberId
 ) {
 }

@@ -1,4 +1,4 @@
-package com.sinor.backend.caching.config;
+package com.sinor.backend.config;
 
 import java.util.NoSuchElementException;
 import org.springframework.boot.diagnostics.AbstractFailureAnalyzer;
